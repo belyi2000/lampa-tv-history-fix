@@ -44,7 +44,7 @@
     if (started) return;
     started = true;
     publish(true);
-    setInterval(function () { publish(false); }, 5 * 60 * 1000);
+    setInterval(function () { publish(false); }, 60 * 1000);
     if (window.Lampa && Lampa.Listener && Lampa.Listener.follow) {
       Lampa.Listener.follow('state:changed', function (e) {
         if (e && e.target === 'favorite') setTimeout(function () { publish(true); }, 800);
