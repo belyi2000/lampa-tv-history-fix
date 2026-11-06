@@ -4,13 +4,8 @@
   var CATS = ['history', 'book', 'like', 'wath'];
   var started = false;
 
-  function post(path, body) {
-    try { fetch('http://192.168.1.189:8765/' + path, {method: 'POST', body: body}); } catch (e) {}
-  }
-
   function publish() {
     try {
-      post('plugin-run', 'run');
       if (!window.Lampa || !Lampa.Account || !Lampa.Account.Permit || !Lampa.Account.Permit.sync) return;
       if (!Lampa.Account.Bookmarks || !Lampa.Account.Bookmarks.get) return;
 
@@ -36,10 +31,7 @@
       if (window.AndroidJS && typeof AndroidJS.updateChannel === 'function') {
         CATS.forEach(function (cat) { AndroidJS.updateChannel(cat); });
       }
-      post('plugin-done', JSON.stringify({history: (fav.history || []).length, cards: cards.length}));
-    } catch (e) {
-      post('plugin-error', String(e));
-    }
+    } catch (e) {}
   }
 
   function start() {
